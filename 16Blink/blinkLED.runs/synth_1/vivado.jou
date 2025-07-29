@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Tue Apr 22 11:07:09 2025
+# Process ID: 15160
+# Current directory: C:/Users/kli007/Downloads/blinkLED/blinkLED.runs/synth_1
+# Command line: vivado.exe -log chainBlink.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source chainBlink.tcl
+# Log file: C:/Users/kli007/Downloads/blinkLED/blinkLED.runs/synth_1/chainBlink.vds
+# Journal file: C:/Users/kli007/Downloads/blinkLED/blinkLED.runs/synth_1\vivado.jou
+# Running On: SUNY-ITS003008, OS: Windows, CPU Frequency: 1613 MHz, CPU Physical cores: 14, Host memory: 16853 MB
+#-----------------------------------------------------------
+source chainBlink.tcl -notrace
