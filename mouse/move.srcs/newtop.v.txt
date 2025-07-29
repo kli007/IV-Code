@@ -1,0 +1,83 @@
+`timescale 1ns / 1ps
+
+module top(
+    input          clk_100MHz,   // Basys3 100 MHz
+    input          reset,        // btnRe
+    input          m_data,       // PS/2 data
+    input          m_clk,        // PS/2 clock
+    output         hsync,        // VGA hsync
+    output         vsync,        // VGA vsync
+    output [11:0]  rgb           // VGA color bus
+);
+
+    //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    // 1) PS/2 mouse interface (no read/data_ready)
+    //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    wire signed [8:0] mouse_x_inc, mouse_y_inc;
+    wire              left_button, right_button;
+
+    ps2_mouse_interface mouse_u (
+        .clk        (clk_100MHz),
+        .rst        (reset),
+        .ps2_clk    (m_clk),
+        .ps2_data   (m_data),
+        .x_increment(mouse_x_inc),
+        .y_increment(mouse_y_inc),
+        .left_button(left_button),
+        .right_button(right_button)
+    );
+
+    //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    // 2) Threshold & dead‑zone to kill jitter
+    //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    localparam THRESH = 3;  // ignore any |delta| < THRESH
+
+    wire up    =  mouse_y_inc >  THRESH;
+    wire down  =  mouse_y_inc < -THRESH;
+    wire left  =  mouse_x_inc < -THRESH;
+    wire right =  mouse_x_inc >  THRESH;
+
+    //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    // 3) VGA controller & Pixel_gen instantiation
+    //––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+    wire        w_vid_on, w_p_tick;
+    wire [9:0]  w_x, w_y;
+    wire [11:0] rgb_next;
+    reg  [11:0] rgb_reg;
+
+    // VGA timing (25 MHz) — reuse your existing vga_controller
+    vga_controller vga_u (
+        .clk_100MHz(clk_100MHz),
+        .reset     (reset),
+        .video_on  (w_vid_on),
+        .hsync     (hsync),
+        .vsync     (vsync),
+        .p_tick    (w_p_tick),
+        .x         (w_x),
+        .y         (w_y)
+    );
+
+    // Your pixel_gen that uses up/down/left/right
+    pixel_gen pix_u (
+        .clk      (clk_100MHz),
+        .reset    (reset),
+        .up       (up),
+        .down     (down),
+        .left     (left),
+        .right    (right),
+        .swt      (1'b0),      // or tie to a button if you want draw-enable
+        .video_on (w_vid_on),
+        .x        (w_x),
+        .y        (w_y),
+        .rgb      (rgb_next)
+    );
+
+    // Double‑buffer rgb on p_tick
+    always @(posedge clk_100MHz) begin
+        if (w_p_tick)
+            rgb_reg <= rgb_next;
+    end
+
+    assign rgb = rgb_reg;
+
+endmodule

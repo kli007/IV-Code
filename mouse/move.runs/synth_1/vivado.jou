@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Wed May 14 18:13:40 2025
+# Process ID: 9640
+# Current directory: C:/Users/kli007/Downloads/move/move.runs/synth_1
+# Command line: vivado.exe -log top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top.tcl
+# Log file: C:/Users/kli007/Downloads/move/move.runs/synth_1/top.vds
+# Journal file: C:/Users/kli007/Downloads/move/move.runs/synth_1\vivado.jou
+# Running On: SUNY-ITS003008, OS: Windows, CPU Frequency: 1613 MHz, CPU Physical cores: 14, Host memory: 16853 MB
+#-----------------------------------------------------------
+source top.tcl -notrace
