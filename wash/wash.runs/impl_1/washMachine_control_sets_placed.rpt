@@ -1,0 +1,92 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.1 (win64) Build 3526262 Mon Apr 18 15:48:16 MDT 2022
+| Date         : Fri May  2 17:44:19 2025
+| Host         : SUNY-ITS003008 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file washMachine_control_sets_placed.rpt
+| Design       : washMachine
+| Device       : xc7a35t
+----------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    14 |
+|    Minimum number of control sets                        |    14 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    34 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    14 |
+| >= 0 to < 4        |     0 |
+| >= 4 to < 6        |     6 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |     1 |
+| >= 10 to < 12      |     1 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     1 |
+| >= 16              |     4 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              12 |            8 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |              15 |            4 |
+| Yes          | No                    | No                     |              48 |           17 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |              83 |           24 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++---------------------+-----------------------------+------------------------+------------------+----------------+--------------+
+|     Clock Signal    |        Enable Signal        |    Set/Reset Signal    | Slice Load Count | Bel Load Count | Bels / Slice |
++---------------------+-----------------------------+------------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG      | cb/state[15]_i_1_n_0        | cb/state[9]_i_1_n_0    |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG      | cb/state[15]_i_1_n_0        | cb/state[5]_i_1_n_0    |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG      | LED_BCD__0                  |                        |                2 |              4 |         2.00 |
+|  clk_IBUF_BUFG      | second[3]_i_1_n_0           |                        |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG      |                             |                        |                4 |              5 |         1.25 |
+|  clk_IBUF_BUFG      | state[4]_i_1_n_0            |                        |                2 |              5 |         2.50 |
+|  seg_reg[0]_i_2_n_0 |                             |                        |                4 |              7 |         1.75 |
+|  clk_IBUF_BUFG      | cb/state[15]_i_1_n_0        |                        |                3 |              8 |         2.67 |
+|  clk_IBUF_BUFG      | FSM_onehot_digit[2]_i_1_n_0 |                        |                4 |             11 |         2.75 |
+|  clk_IBUF_BUFG      |                             | LEDcounter[15]_i_1_n_0 |                4 |             15 |         3.75 |
+|  clk_IBUF_BUFG      | cb/LED[15]_i_1__0_n_0       |                        |                5 |             16 |         3.20 |
+|  clk_IBUF_BUFG      | LED[15]_i_2_n_0             | LED0                   |                7 |             16 |         2.29 |
+|  clk_IBUF_BUFG      | cb/state_reg[4]_0           | cb/counter[24]_i_1_n_0 |                6 |             24 |         4.00 |
+|  clk_IBUF_BUFG      | Counter                     | second[3]_i_1_n_0      |                9 |             35 |         3.89 |
++---------------------+-----------------------------+------------------------+------------------+----------------+--------------+
+
+
